@@ -61,3 +61,40 @@ Este comando mapeia os ponteiros entre `0x120000-0x13FFFF` na ROM original e `0x
 ## Arquivo de Log
 
 A ferramenta gera um log detalhado chamado `global_repointer_log.txt`, contendo todos os parâmetros usados, o mapa de ponteiros "DE -> PARA" e um relatório de cada substituição individual realizada, permitindo uma auditoria completa da operação.
+
+### Exemplo de Saída (`example_log.txt`)
+
+```text
+Relatório de Execução - Mapeador e Substituidor Global de Ponteiros - 2025-10-12 12:42:54
+ROM Original: medabots_original.gba
+ROM Alvo (Traduzida): medabots.gba
+--------------------------------------------------------------------------------
+Parâmetros de Análise:
+  Sequências Alvo Buscadas: 00FB,02FB,04FB,08FB
+  Janela de Busca na ROM Original: 0x41AE31 - 0x41BF22
+  Janela de Busca na ROM Traduzida: 0x41AE31 - 0x41BF22
+--------------------------------------------------------------------------------
+
+== Mapa de Ponteiros 'DE -> PARA' Criado ==
+Total de 51 pares mapeados.
+--------------------------------------------------------------------------------
+Valor Antigo (Int) | Bytes Antigos (LE)   | -> | Novo Valor (Int) | Novo Valor (Bytes LE)
+--------------------------------------------------------------------------------
+0x0841AE33         | 33 AE 41 08        | -> | 0x0841AE33         | 33 AE 41 08
+0x0841AE7F         | 7F AE 41 08        | -> | 0x0841AE83         | 83 AE 41 08
+0x0841AEAB         | AB AE 41 08        | -> | 0x0841AEB0         | B0 AE 41 08
+...
+--------------------------------------------------------------------------------
+
+== Relatório de Substituições Globais ==
+Substituindo o ponteiro antigo... | ...pelo ponteiro novo... | ...no endereço (offset) da ROM Alvo.
+--------------------------------------------------------------------------------
+0x0841AE33 (33 AE 41 08) | 0x0841AE33 (33 AE 41 08) | 0x0047FC38
+0x0841AE7F (7F AE 41 08) | 0x0841AE83 (83 AE 41 08) | 0x0047FC3C
+0x0841AEAB (AB AE 41 08) | 0x0841AEB0 (B0 AE 41 08) | 0x0047FC40
+...
+--------------------------------------------------------------------------------
+Operação concluída com sucesso. Total de 51 substituições realizadas.
+```
+
+**[➡️ Veja o log completo aqui.](example_log.txt)**
